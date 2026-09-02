@@ -1,0 +1,3114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Absensi Online</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f1f5f9;
+    color:#1e293b;
+}
+
+/* ================= LOGIN ================= */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:linear-gradient(135deg,#2563eb,#1e3a8a);
+}
+
+.login-box{
+    background:white;
+    width:400px;
+    max-width:100%;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.login-box h1{
+    text-align:center;
+    color:#2563eb;
+    margin-bottom:8px;
+}
+
+.login-box p{
+    text-align:center;
+    color:#64748b;
+    margin-bottom:25px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.login-button{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.login-button:hover{
+    background:#1d4ed8;
+}
+
+.info-login{
+    margin-top:20px;
+    padding:15px;
+    background:#eff6ff;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.8;
+}
+
+/* ================= APP ================= */
+
+#app{
+    display:none;
+    min-height:100vh;
+}
+
+.header{
+    background:#2563eb;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header h2{
+    font-size:22px;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logout{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    background:white;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:20px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.nav-button{
+    border:none;
+    padding:10px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    background:#e2e8f0;
+    font-weight:bold;
+}
+
+.nav-button.active{
+    background:#2563eb;
+    color:white;
+}
+
+/* ================= PAGE ================= */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.card h2{
+    color:#2563eb;
+    margin-bottom:20px;
+}
+
+/* ================= DASHBOARD ================= */
+
+.welcome{
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+    border-radius:10px;
+    color:white;
+}
+
+.stat h3{
+    font-size:30px;
+    margin-top:10px;
+}
+
+.green{
+    background:#16a34a;
+}
+
+.yellow{
+    background:#eab308;
+    color:#111827;
+}
+
+.blue{
+    background:#0891b2;
+}
+
+.red{
+    background:#dc2626;
+}
+
+/* ================= INFO SISWA ================= */
+
+.student-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.info{
+    background:#eff6ff;
+    padding:15px;
+    border-radius:8px;
+}
+
+.info small{
+    color:#64748b;
+}
+
+.info strong{
+    display:block;
+    margin-top:5px;
+    font-size:18px;
+}
+
+/* ================= BUTTON ================= */
+
+.main-button{
+    width:100%;
+    padding:13px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.btn{
+    border:none;
+    padding:9px 13px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    margin:2px;
+}
+
+.btn-blue{
+    background:#2563eb;
+}
+
+.btn-green{
+    background:#16a34a;
+}
+
+.btn-red{
+    background:#dc2626;
+}
+
+.btn-gray{
+    background:#64748b;
+}
+
+/* ================= FOTO ================= */
+
+.preview{
+    width:220px;
+    height:220px;
+    border:2px dashed #94a3b8;
+    border-radius:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:10px;
+    color:#64748b;
+    overflow:hidden;
+}
+
+.preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* ================= TABLE ================= */
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:800px;
+}
+
+th,
+td{
+    padding:10px;
+    border-bottom:1px solid #e2e8f0;
+    text-align:left;
+}
+
+th{
+    background:#2563eb;
+    color:white;
+}
+
+.photo{
+    width:60px;
+    height:60px;
+    object-fit:cover;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+/* ================= FILTER ================= */
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr auto;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.filters input,
+.filters select{
+    padding:11px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+    padding:20px;
+}
+
+.modal-content{
+    background:white;
+    width:450px;
+    max-width:100%;
+    padding:25px;
+    border-radius:12px;
+}
+
+.close{
+    position:absolute;
+    right:25px;
+    top:15px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+
+.modal-photo{
+    max-width:90%;
+    max-height:90%;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:800px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .student-info{
+        grid-template-columns:1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:10px;
+    }
+}
+
+@media(max-width:500px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ==================================================
+LOGIN
+================================================== -->
+
+<div id="loginPage">
+
+<div class="login-box">
+
+<h1>📋 Absensi Online</h1>
+
+<p>Sistem Absensi Siswa</p>
+
+
+<div class="form-group">
+
+<label>Username</label>
+
+<input
+type="text"
+id="username"
+placeholder="Masukkan username">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Masukkan password">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Login sebagai</label>
+
+<select id="role">
+
+<option value="siswa">
+Siswa
+</option>
+
+<option value="guru">
+Guru
+</option>
+
+<option value="admin">
+Admin
+</option>
+
+</select>
+
+</div>
+
+
+<button
+class="login-button"
+onclick="login()">
+
+LOGIN
+
+</button>
+
+
+<div class="info-login">
+
+<b>Akun Admin</b><br>
+Username: admin<br>
+Password: admin123
+
+<br><br>
+
+<b>Akun Guru</b><br>
+Username: guru<br>
+Password: guru123
+
+<br><br>
+
+<b>Akun Siswa Demo</b><br>
+Username: siswa<br>
+Password: siswa123
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+APP
+================================================== -->
+
+<div id="app">
+
+
+<div class="header">
+
+<h2>📋 Absensi Online</h2>
+
+<div class="user-area">
+
+<span id="namaLogin"></span>
+
+<button
+class="logout"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+
+<button
+class="nav-button active"
+id="dashboardNav"
+onclick="showPage('dashboardPage',this)">
+
+🏠 Dashboard
+
+</button>
+
+
+<button
+class="nav-button"
+id="presensiNav"
+onclick="showPage('presensiPage',this)">
+
+📝 Presensi
+
+</button>
+
+
+<button
+class="nav-button"
+id="siswaNav"
+onclick="showPage('siswaPage',this)">
+
+👨‍🎓 Data Siswa
+
+</button>
+
+
+<button
+class="nav-button"
+id="laporanNav"
+onclick="showPage('laporanPage',this)">
+
+📊 Laporan
+
+</button>
+
+
+</div>
+
+
+<!-- ==================================================
+DASHBOARD
+================================================== -->
+
+<div
+id="dashboardPage"
+class="page active">
+
+<div class="welcome">
+
+<h2>Selamat Datang 👋</h2>
+
+<p id="welcomeText">
+Absensi Online
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat green">
+
+Hadir
+
+<h3 id="hadirCount">
+0
+</h3>
+
+</div>
+
+
+<div class="stat yellow">
+
+Izin
+
+<h3 id="izinCount">
+0
+</h3>
+
+</div>
+
+
+<div class="stat blue">
+
+Sakit
+
+<h3 id="sakitCount">
+0
+</h3>
+
+</div>
+
+
+<div class="stat red">
+
+Alpa
+
+<h3 id="alpaCount">
+0
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+PRESENSI SISWA
+================================================== -->
+
+<div
+id="presensiPage"
+class="page">
+
+<div class="card">
+
+<h2>📝 Presensi Hari Ini</h2>
+
+
+<div class="student-info">
+
+<div class="info">
+
+<small>ID Siswa</small>
+
+<strong id="studentId">-</strong>
+
+</div>
+
+
+<div class="info">
+
+<small>Nama</small>
+
+<strong id="studentName">-</strong>
+
+</div>
+
+
+<div class="info">
+
+<small>Kelas</small>
+
+<strong id="studentClass">-</strong>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Status Kehadiran</label>
+
+<select id="status">
+
+<option value="Hadir">
+Hadir
+</option>
+
+<option value="Izin">
+Izin
+</option>
+
+<option value="Sakit">
+Sakit
+</option>
+
+<option value="Alpa">
+Alpa
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>📷 Foto Kehadiran</label>
+
+<input
+type="file"
+id="foto"
+accept="image/*"
+capture="user"
+onchange="previewFoto(event)">
+
+<small>
+Maksimal 20 MB.
+</small>
+
+
+<div
+class="preview"
+id="preview">
+
+Belum ada foto
+
+</div>
+
+</div>
+
+
+<button
+class="main-button"
+onclick="kirimPresensi()">
+
+✓ KIRIM PRESENSI
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+DATA SISWA
+================================================== -->
+
+<div
+id="siswaPage"
+class="page">
+
+<div class="card">
+
+<h2>👨‍🎓 Data Siswa</h2>
+
+
+<button
+class="btn btn-green"
+onclick="openStudentForm()">
+
++ Tambah Siswa
+
+</button>
+
+
+<br><br>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>ID</th>
+<th>Nama</th>
+<th>Kelas</th>
+<th>Username</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+LAPORAN
+================================================== -->
+
+<div
+id="laporanPage"
+class="page">
+
+<div class="card">
+
+<h2>📊 Laporan Absensi</h2>
+
+
+<div style="margin-bottom:15px;">
+
+<button
+class="btn btn-green"
+onclick="downloadCSV()">
+
+📥 Download CSV
+
+</button>
+
+
+<button
+class="btn btn-blue"
+onclick="printReport()">
+
+🖨️ Cetak / PDF
+
+</button>
+
+</div>
+
+
+<div class="filters">
+
+<input
+type="text"
+id="search"
+placeholder="Cari nama atau ID..."
+oninput="showReport()">
+
+
+<select
+id="filterClass"
+onchange="showReport()">
+
+<option value="">
+Semua Kelas
+</option>
+
+<option>X TJKT 1</option>
+<option>X TJKT 2</option>
+<option>X TJKT 3</option>
+
+<option>XI TJKT 1</option>
+<option>XI TJKT 2</option>
+<option>XI TJKT 3</option>
+
+<option>XII TJKT 1</option>
+<option>XII TJKT 2</option>
+<option>XII TJKT 3</option>
+
+</select>
+
+
+<select
+id="filterStatus"
+onchange="showReport()">
+
+<option value="">
+Semua Status
+</option>
+
+<option>Hadir</option>
+<option>Izin</option>
+<option>Sakit</option>
+<option>Alpa</option>
+
+</select>
+
+
+<button
+class="btn btn-gray"
+onclick="resetFilter()">
+
+Reset
+
+</button>
+
+</div>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>No</th>
+<th>Foto</th>
+<th>ID</th>
+<th>Nama</th>
+<th>Kelas</th>
+<th>Tanggal</th>
+<th>Jam</th>
+<th>Status</th>
+<th>Aksi</th>
+
+</tr>
+
+</thead>
+
+<tbody id="reportTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+MODAL SISWA
+================================================== -->
+
+<div
+class="modal"
+id="studentModal">
+
+<div class="modal-content">
+
+<h2>Data Siswa</h2>
+
+
+<input
+type="hidden"
+id="editStudentId">
+
+
+<div class="form-group">
+
+<label>ID Siswa</label>
+
+<input
+type="text"
+id="inputStudentId"
+placeholder="Contoh: S001">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Nama Siswa</label>
+
+<input
+type="text"
+id="inputStudentName"
+placeholder="Nama lengkap">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Kelas</label>
+
+<select id="inputStudentClass">
+
+<option value="">
+Pilih Kelas
+</option>
+
+<option>X TJKT 1</option>
+<option>X TJKT 2</option>
+<option>X TJKT 3</option>
+
+<option>XI TJKT 1</option>
+<option>XI TJKT 2</option>
+<option>XI TJKT 3</option>
+
+<option>XII TJKT 1</option>
+<option>XII TJKT 2</option>
+<option>XII TJKT 3</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Username</label>
+
+<input
+type="text"
+id="inputStudentUsername"
+placeholder="Username">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Password</label>
+
+<input
+type="password"
+id="inputStudentPassword"
+placeholder="Password">
+
+</div>
+
+
+<button
+class="btn btn-green"
+onclick="saveStudent()">
+
+Simpan
+
+</button>
+
+
+<button
+class="btn btn-gray"
+onclick="closeStudentForm()">
+
+Batal
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ==================================================
+MODAL FOTO
+================================================== -->
+
+<div
+class="modal"
+id="photoModal"
+onclick="closePhoto()">
+
+<span class="close">
+×
+</span>
+
+<img
+id="bigPhoto"
+class="modal-photo">
+
+</div>
+
+
+<!-- ==================================================
+FIREBASE
+================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc,
+    deleteDoc,
+    query,
+    where,
+    orderBy
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+/* ==================================================
+1. MASUKKAN CONFIG FIREBASE KAMU
+================================================== */
+
+const firebaseConfig = {
+
+    apiKey: "MASUKKAN_API_KEY",
+
+    authDomain:
+        "MASUKKAN_PROJECT_ID.firebaseapp.com",
+
+    projectId:
+        "MASUKKAN_PROJECT_ID",
+
+    storageBucket:
+        "MASUKKAN_PROJECT_ID.firebasestorage.app",
+
+    messagingSenderId:
+        "MASUKKAN_MESSAGING_SENDER_ID",
+
+    appId:
+        "MASUKKAN_APP_ID"
+
+};
+
+
+/* ==================================================
+2. INISIALISASI FIREBASE
+================================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const db =
+    getFirestore(app);
+
+
+/* ==================================================
+DATA USER
+================================================== */
+
+const ADMIN = {
+
+    username:"admin",
+
+    password:"admin123",
+
+    nama:"Administrator",
+
+    role:"admin"
+
+};
+
+
+const GURU = {
+
+    username:"guru",
+
+    password:"guru123",
+
+    nama:"Guru",
+
+    role:"guru"
+
+};
+
+
+let currentUser = null;
+
+let selectedPhoto = "";
+
+
+/* ==================================================
+FUNGSI GLOBAL
+================================================== */
+
+window.login = login;
+
+window.logout = logout;
+
+window.showPage = showPage;
+
+window.previewFoto = previewFoto;
+
+window.kirimPresensi = kirimPresensi;
+
+window.openStudentForm = openStudentForm;
+
+window.closeStudentForm = closeStudentForm;
+
+window.saveStudent = saveStudent;
+
+window.editStudent = editStudent;
+
+window.deleteStudent = deleteStudent;
+
+window.showReport = showReport;
+
+window.downloadCSV = downloadCSV;
+
+window.printReport = printReport;
+
+window.resetFilter = resetFilter;
+
+window.viewPhoto = viewPhoto;
+
+window.closePhoto = closePhoto;
+
+window.deleteAttendance = deleteAttendance;
+
+
+/* ==================================================
+LOGIN
+================================================== */
+
+async function login(){
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const role =
+        document
+        .getElementById("role")
+        .value;
+
+
+    if(!username || !password){
+
+        alert(
+            "Username dan password harus diisi!"
+        );
+
+        return;
+
+    }
+
+
+    /* ADMIN */
+
+    if(role === "admin"){
+
+        if(
+            username === ADMIN.username &&
+            password === ADMIN.password
+        ){
+
+            currentUser = ADMIN;
+
+            masukAplikasi();
+
+            return;
+
+        }
+
+
+        alert("Login Admin gagal!");
+
+        return;
+
+    }
+
+
+    /* GURU */
+
+    if(role === "guru"){
+
+        if(
+            username === GURU.username &&
+            password === GURU.password
+        ){
+
+            currentUser = GURU;
+
+            masukAplikasi();
+
+            return;
+
+        }
+
+
+        alert("Login Guru gagal!");
+
+        return;
+
+    }
+
+
+    /* SISWA */
+
+    try{
+
+        const q =
+            query(
+                collection(db,"students"),
+                where("username","==",username),
+                where("password","==",password)
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if(snapshot.empty){
+
+            alert(
+                "Username atau password siswa salah!"
+            );
+
+            return;
+
+        }
+
+
+        const student =
+            snapshot.docs[0].data();
+
+
+        currentUser = {
+
+            role:"siswa",
+
+            username:student.username,
+
+            password:student.password,
+
+            id:student.id,
+
+            nama:student.name,
+
+            class:student.class,
+
+            docId:snapshot.docs[0].id
+
+        };
+
+
+        masukAplikasi();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Gagal menghubungkan ke database Firebase.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+MASUK APLIKASI
+================================================== */
+
+function masukAplikasi(){
+
+    document
+        .getElementById("loginPage")
+        .style.display="none";
+
+
+    document
+        .getElementById("app")
+        .style.display="block";
+
+
+    document
+        .getElementById("namaLogin")
+        .textContent =
+        currentUser.nama +
+        " (" +
+        currentUser.role.toUpperCase() +
+        ")";
+
+
+    setupMenu();
+
+    updateDashboard();
+
+    if(currentUser.role === "admin"){
+
+        loadStudentData();
+
+        showReport();
+
+    }
+
+
+    if(
+        currentUser.role === "guru"
+    ){
+
+        showReport();
+
+    }
+
+}
+
+
+/* ==================================================
+MENU
+================================================== */
+
+function setupMenu(){
+
+    const presensiNav =
+        document.getElementById(
+            "presensiNav"
+        );
+
+
+    const siswaNav =
+        document.getElementById(
+            "siswaNav"
+        );
+
+
+    const laporanNav =
+        document.getElementById(
+            "laporanNav"
+        );
+
+
+    presensiNav.style.display="none";
+
+    siswaNav.style.display="none";
+
+    laporanNav.style.display="none";
+
+
+    if(currentUser.role === "siswa"){
+
+        presensiNav.style.display="block";
+
+
+        document.getElementById(
+            "studentId"
+        ).textContent =
+            currentUser.id;
+
+
+        document.getElementById(
+            "studentName"
+        ).textContent =
+            currentUser.nama;
+
+
+        document.getElementById(
+            "studentClass"
+        ).textContent =
+            currentUser.class;
+
+
+        document.getElementById(
+            "welcomeText"
+        ).textContent =
+            "Halo " +
+            currentUser.nama +
+            "!";
+
+    }
+
+
+    if(currentUser.role === "guru"){
+
+        laporanNav.style.display="block";
+
+
+        document.getElementById(
+            "welcomeText"
+        ).textContent =
+            "Selamat datang, Guru.";
+
+    }
+
+
+    if(currentUser.role === "admin"){
+
+        siswaNav.style.display="block";
+
+        laporanNav.style.display="block";
+
+
+        document.getElementById(
+            "welcomeText"
+        ).textContent =
+            "Selamat datang, Administrator.";
+
+    }
+
+}
+
+
+/* ==================================================
+NAVIGASI
+================================================== */
+
+function showPage(pageId,button){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+
+            page.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    document
+        .getElementById(pageId)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".nav-button")
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add("active");
+
+
+    if(pageId === "siswaPage"){
+
+        loadStudentData();
+
+    }
+
+
+    if(pageId === "laporanPage"){
+
+        showReport();
+
+    }
+
+}
+
+
+/* ==================================================
+PREVIEW FOTO
+================================================== */
+
+function previewFoto(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file){
+
+        return;
+
+    }
+
+
+    const maxSize =
+        20 * 1024 * 1024;
+
+
+    if(!file.type.startsWith("image/")){
+
+        alert(
+            "File harus berupa gambar!"
+        );
+
+        event.target.value="";
+
+        return;
+
+    }
+
+
+    if(file.size > maxSize){
+
+        alert(
+            "Foto terlalu besar!\n" +
+            "Maksimal 20 MB."
+        );
+
+        event.target.value="";
+
+        selectedPhoto="";
+
+        document.getElementById(
+            "preview"
+        ).innerHTML =
+            "Belum ada foto";
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(e){
+
+            selectedPhoto =
+                e.target.result;
+
+
+            document.getElementById(
+                "preview"
+            ).innerHTML = `
+
+                <img
+                src="${selectedPhoto}">
+
+            `;
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
+KIRIM PRESENSI
+================================================== */
+
+async function kirimPresensi(){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "siswa"
+    ){
+
+        alert(
+            "Hanya siswa yang dapat melakukan presensi!"
+        );
+
+        return;
+
+    }
+
+
+    if(selectedPhoto === ""){
+
+        alert(
+            "Silakan pilih foto kehadiran!"
+        );
+
+        return;
+
+    }
+
+
+    const status =
+        document.getElementById(
+            "status"
+        ).value;
+
+
+    const now =
+        new Date();
+
+
+    const date =
+        now.toLocaleDateString(
+            "id-ID"
+        );
+
+
+    /* CEK ABSEN HARI INI */
+
+    try{
+
+        const q =
+            query(
+                collection(db,"attendance"),
+                where(
+                    "studentId",
+                    "==",
+                    currentUser.id
+                ),
+                where(
+                    "date",
+                    "==",
+                    date
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if(!snapshot.empty){
+
+            alert(
+                "Kamu sudah melakukan presensi hari ini!"
+            );
+
+            return;
+
+        }
+
+
+        await addDoc(
+            collection(
+                db,
+                "attendance"
+            ),
+            {
+
+                studentId:
+                    currentUser.id,
+
+                name:
+                    currentUser.nama,
+
+                class:
+                    currentUser.class,
+
+                date:
+                    date,
+
+                time:
+                    now.toLocaleTimeString(
+                        "id-ID"
+                    ),
+
+                status:
+                    status,
+
+                photo:
+                    selectedPhoto,
+
+                createdAt:
+                    Date.now()
+
+            }
+        );
+
+
+        alert(
+            "✅ Presensi berhasil disimpan!"
+        );
+
+
+        selectedPhoto="";
+
+
+        document.getElementById(
+            "foto"
+        ).value="";
+
+
+        document.getElementById(
+            "preview"
+        ).innerHTML =
+            "Belum ada foto";
+
+
+        updateDashboard();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Gagal menyimpan presensi.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+LOAD DATA SISWA
+================================================== */
+
+async function loadStudentData(){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "admin"
+    ){
+
+        return;
+
+    }
+
+
+    const table =
+        document.getElementById(
+            "studentTable"
+        );
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+            colspan="6"
+            style="text-align:center">
+
+            Memuat data...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "students"
+                )
+            );
+
+
+        table.innerHTML="";
+
+
+        if(snapshot.empty){
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                    colspan="6"
+                    style="text-align:center">
+
+                    Belum ada data siswa.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+
+        }
+
+
+        let no=1;
+
+
+        snapshot.forEach(
+            function(docSnap){
+
+                const student =
+                    docSnap.data();
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>${no++}</td>
+
+                    <td>
+                        ${student.id}
+                    </td>
+
+                    <td>
+                        ${student.name}
+                    </td>
+
+                    <td>
+                        ${student.class}
+                    </td>
+
+                    <td>
+                        ${student.username}
+                    </td>
+
+                    <td>
+
+                        <button
+                        class="btn btn-blue"
+                        onclick="editStudent('${docSnap.id}')">
+
+                        Edit
+
+                        </button>
+
+
+                        <button
+                        class="btn btn-red"
+                        onclick="deleteStudent('${docSnap.id}')">
+
+                        Hapus
+
+                        </button>
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                colspan="6"
+                style="text-align:center">
+
+                Gagal mengambil data.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* ==================================================
+FORM SISWA
+================================================== */
+
+function openStudentForm(){
+
+    document.getElementById(
+        "studentModal"
+    ).style.display="flex";
+
+
+    document.getElementById(
+        "editStudentId"
+    ).value="";
+
+
+    document.getElementById(
+        "inputStudentId"
+    ).value="";
+
+
+    document.getElementById(
+        "inputStudentName"
+    ).value="";
+
+
+    document.getElementById(
+        "inputStudentClass"
+    ).value="";
+
+
+    document.getElementById(
+        "inputStudentUsername"
+    ).value="";
+
+
+    document.getElementById(
+        "inputStudentPassword"
+    ).value="";
+
+}
+
+
+function closeStudentForm(){
+
+    document.getElementById(
+        "studentModal"
+    ).style.display="none";
+
+}
+
+
+/* ==================================================
+SIMPAN SISWA KE FIRESTORE
+================================================== */
+
+async function saveStudent(){
+
+    const id =
+        document.getElementById(
+            "inputStudentId"
+        ).value.trim();
+
+
+    const name =
+        document.getElementById(
+            "inputStudentName"
+        ).value.trim();
+
+
+    const className =
+        document.getElementById(
+            "inputStudentClass"
+        ).value;
+
+
+    const username =
+        document.getElementById(
+            "inputStudentUsername"
+        ).value.trim();
+
+
+    const password =
+        document.getElementById(
+            "inputStudentPassword"
+        ).value;
+
+
+    const editId =
+        document.getElementById(
+            "editStudentId"
+        ).value;
+
+
+    if(
+        !id ||
+        !name ||
+        !className ||
+        !username ||
+        !password
+    ){
+
+        alert(
+            "Semua data siswa harus diisi!"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        /* CEK USERNAME */
+
+        const q =
+            query(
+                collection(db,"students"),
+                where(
+                    "username",
+                    "==",
+                    username
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if(
+            !snapshot.empty &&
+            (
+                editId === "" ||
+                snapshot.docs[0].id !== editId
+            )
+        ){
+
+            alert(
+                "Username sudah digunakan!"
+            );
+
+            return;
+
+        }
+
+
+        const data = {
+
+            id:id,
+
+            name:name,
+
+            class:className,
+
+            username:username,
+
+            password:password
+
+        };
+
+
+        if(editId){
+
+            await updateDoc(
+                doc(
+                    db,
+                    "students",
+                    editId
+                ),
+                data
+            );
+
+        }
+        else{
+
+            await addDoc(
+                collection(
+                    db,
+                    "students"
+                ),
+                data
+            );
+
+        }
+
+
+        alert(
+            "Data siswa berhasil disimpan!"
+        );
+
+
+        closeStudentForm();
+
+        loadStudentData();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Gagal menyimpan data siswa.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+EDIT SISWA
+================================================== */
+
+async function editStudent(docId){
+
+    try{
+
+        const snapshot =
+            await getDoc(
+                doc(
+                    db,
+                    "students",
+                    docId
+                )
+            );
+
+
+        if(!snapshot.exists()){
+
+            alert(
+                "Data siswa tidak ditemukan!"
+            );
+
+            return;
+
+        }
+
+
+        const student =
+            snapshot.data();
+
+
+        openStudentForm();
+
+
+        document.getElementById(
+            "editStudentId"
+        ).value=docId;
+
+
+        document.getElementById(
+            "inputStudentId"
+        ).value=student.id;
+
+
+        document.getElementById(
+            "inputStudentName"
+        ).value=student.name;
+
+
+        document.getElementById(
+            "inputStudentClass"
+        ).value=student.class;
+
+
+        document.getElementById(
+            "inputStudentUsername"
+        ).value=student.username;
+
+
+        document.getElementById(
+            "inputStudentPassword"
+        ).value=student.password;
+
+    }
+
+    catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+HAPUS SISWA
+================================================== */
+
+async function deleteStudent(docId){
+
+    if(
+        !confirm(
+            "Yakin ingin menghapus siswa ini?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "students",
+                docId
+            )
+        );
+
+
+        alert(
+            "Data siswa berhasil dihapus!"
+        );
+
+
+        loadStudentData();
+
+    }
+
+    catch(error){
+
+        alert(
+            "Gagal menghapus data.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+LAPORAN
+================================================== */
+
+async function showReport(){
+
+    const table =
+        document.getElementById(
+            "reportTable"
+        );
+
+
+    if(!table){
+
+        return;
+
+    }
+
+
+    table.innerHTML = `
+
+        <tr>
+
+            <td
+            colspan="9"
+            style="text-align:center">
+
+            Memuat laporan...
+
+            </td>
+
+        </tr>
+
+    `;
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "attendance"
+                )
+            );
+
+
+        let data=[];
+
+
+        snapshot.forEach(
+            docSnap => {
+
+                data.push({
+
+                    firestoreId:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                });
+
+            }
+        );
+
+
+        const search =
+            document
+            .getElementById("search")
+            .value
+            .toLowerCase();
+
+
+        const filterClass =
+            document
+            .getElementById("filterClass")
+            .value;
+
+
+        const filterStatus =
+            document
+            .getElementById("filterStatus")
+            .value;
+
+
+        data =
+            data.filter(
+                item => {
+
+                    const searchMatch =
+
+                        item.name
+                        .toLowerCase()
+                        .includes(search)
+
+                        ||
+
+                        item.studentId
+                        .toLowerCase()
+                        .includes(search);
+
+
+                    return(
+
+                        searchMatch &&
+
+                        (
+                            filterClass === "" ||
+                            item.class === filterClass
+                        )
+
+                        &&
+
+                        (
+                            filterStatus === "" ||
+                            item.status === filterStatus
+                        )
+
+                    );
+
+                }
+            );
+
+
+        data.sort(
+            (a,b) =>
+                (b.createdAt || 0) -
+                (a.createdAt || 0)
+        );
+
+
+        table.innerHTML="";
+
+
+        data.forEach(
+            function(item,index){
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${index+1}
+                    </td>
+
+                    <td>
+
+                        <img
+                        src="${item.photo}"
+                        class="photo"
+                        onclick="viewPhoto('${item.photo}')">
+
+                    </td>
+
+                    <td>
+                        ${item.studentId}
+                    </td>
+
+                    <td>
+                        ${item.name}
+                    </td>
+
+                    <td>
+                        ${item.class}
+                    </td>
+
+                    <td>
+                        ${item.date}
+                    </td>
+
+                    <td>
+                        ${item.time}
+                    </td>
+
+                    <td>
+                        ${item.status}
+                    </td>
+
+                    <td>
+
+                        ${
+                            currentUser.role === "admin"
+
+                            ?
+
+                            `
+                            <button
+                            class="btn btn-red"
+                            onclick="deleteAttendance('${item.firestoreId}')">
+
+                            Hapus
+
+                            </button>
+                            `
+
+                            :
+
+                            ""
+
+                        }
+
+                    </td>
+
+                `;
+
+
+                table.appendChild(row);
+
+            }
+        );
+
+
+        if(data.length===0){
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                    colspan="9"
+                    style="text-align:center">
+
+                    Belum ada data absensi.
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                colspan="9"
+                style="text-align:center">
+
+                Gagal mengambil laporan.
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+/* ==================================================
+HAPUS ABSENSI
+================================================== */
+
+async function deleteAttendance(docId){
+
+    if(
+        !confirm(
+            "Yakin ingin menghapus data absensi?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "attendance",
+                docId
+            )
+        );
+
+
+        alert(
+            "Data absensi berhasil dihapus!"
+        );
+
+
+        showReport();
+
+        updateDashboard();
+
+    }
+
+    catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+DASHBOARD
+================================================== */
+
+async function updateDashboard(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "attendance"
+                )
+            );
+
+
+        let hadir=0;
+        let izin=0;
+        let sakit=0;
+        let alpa=0;
+
+
+        snapshot.forEach(
+            docSnap => {
+
+                const item =
+                    docSnap.data();
+
+
+                if(item.status==="Hadir"){
+                    hadir++;
+                }
+
+                if(item.status==="Izin"){
+                    izin++;
+                }
+
+                if(item.status==="Sakit"){
+                    sakit++;
+                }
+
+                if(item.status==="Alpa"){
+                    alpa++;
+                }
+
+            }
+        );
+
+
+        document.getElementById(
+            "hadirCount"
+        ).textContent=hadir;
+
+
+        document.getElementById(
+            "izinCount"
+        ).textContent=izin;
+
+
+        document.getElementById(
+            "sakitCount"
+        ).textContent=sakit;
+
+
+        document.getElementById(
+            "alpaCount"
+        ).textContent=alpa;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* ==================================================
+DOWNLOAD CSV
+================================================== */
+
+async function downloadCSV(){
+
+    if(
+        !currentUser ||
+        currentUser.role !== "admin"
+    ){
+
+        alert(
+            "Hanya Admin yang dapat mengunduh laporan!"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "attendance"
+                )
+            );
+
+
+        if(snapshot.empty){
+
+            alert(
+                "Belum ada data absensi!"
+            );
+
+            return;
+
+        }
+
+
+        let csv =
+            "No,ID Siswa,Nama,Kelas,Tanggal,Jam,Status\n";
+
+
+        let no=1;
+
+
+        snapshot.forEach(
+            docSnap => {
+
+                const item =
+                    docSnap.data();
+
+
+                csv +=
+
+                    `${no++},` +
+
+                    `"${item.studentId}",` +
+
+                    `"${item.name}",` +
+
+                    `"${item.class}",` +
+
+                    `"${item.date}",` +
+
+                    `"${item.time}",` +
+
+                    `"${item.status}"\n`;
+
+            }
+        );
+
+
+        const blob =
+            new Blob(
+                [csv],
+                {
+                    type:
+                    "text/csv;charset=utf-8;"
+                }
+            );
+
+
+        const url =
+            URL.createObjectURL(blob);
+
+
+        const a =
+            document.createElement("a");
+
+
+        a.href=url;
+
+        a.download=
+            "Laporan_Absensi.csv";
+
+
+        a.click();
+
+
+        URL.revokeObjectURL(url);
+
+    }
+
+    catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+PRINT
+================================================== */
+
+async function printReport(){
+
+    try{
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "attendance"
+                )
+            );
+
+
+        let html = `
+
+        <html>
+
+        <head>
+
+        <title>
+        Laporan Absensi
+        </title>
+
+        <style>
+
+        body{
+            font-family:Arial;
+            padding:30px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th,td{
+            border:1px solid #000;
+            padding:8px;
+        }
+
+        th{
+            background:#ddd;
+        }
+
+        </style>
+
+        </head>
+
+        <body>
+
+        <h1>
+        LAPORAN ABSENSI ONLINE
+        </h1>
+
+        <p>
+        Dicetak:
+        ${new Date().toLocaleString("id-ID")}
+        </p>
+
+        <table>
+
+        <tr>
+
+        <th>No</th>
+        <th>ID</th>
+        <th>Nama</th>
+        <th>Kelas</th>
+        <th>Tanggal</th>
+        <th>Jam</th>
+        <th>Status</th>
+
+        </tr>
+
+        `;
+
+
+        let no=1;
+
+
+        snapshot.forEach(
+            docSnap => {
+
+                const item =
+                    docSnap.data();
+
+
+                html += `
+
+                <tr>
+
+                <td>${no++}</td>
+
+                <td>${item.studentId}</td>
+
+                <td>${item.name}</td>
+
+                <td>${item.class}</td>
+
+                <td>${item.date}</td>
+
+                <td>${item.time}</td>
+
+                <td>${item.status}</td>
+
+                </tr>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+
+        </table>
+
+        </body>
+
+        </html>
+
+        `;
+
+
+        const printWindow =
+            window.open(
+                "",
+                "_blank"
+            );
+
+
+        printWindow.document.write(
+            html
+        );
+
+
+        printWindow.document.close();
+
+        printWindow.print();
+
+    }
+
+    catch(error){
+
+        alert(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+FILTER RESET
+================================================== */
+
+function resetFilter(){
+
+    document.getElementById(
+        "search"
+    ).value="";
+
+
+    document.getElementById(
+        "filterClass"
+    ).value="";
+
+
+    document.getElementById(
+        "filterStatus"
+    ).value="";
+
+
+    showReport();
+
+}
+
+
+/* ==================================================
+FOTO
+================================================== */
+
+function viewPhoto(src){
+
+    document.getElementById(
+        "bigPhoto"
+    ).src=src;
+
+
+    document.getElementById(
+        "photoModal"
+    ).style.display="flex";
+
+}
+
+
+function closePhoto(){
+
+    document.getElementById(
+        "photoModal"
+    ).style.display="none";
+
+}
+
+
+/* ==================================================
+LOGOUT
+================================================== */
+
+function logout(){
+
+    currentUser=null;
+
+
+    document.getElementById(
+        "app"
+    ).style.display="none";
+
+
+    document.getElementById(
+        "loginPage"
+    ).style.display="flex";
+
+
+    document.getElementById(
+        "username"
+    ).value="";
+
+
+    document.getElementById(
+        "password"
+    ).value="";
+
+}
+
+</script>
+
+</body>
+</html>
